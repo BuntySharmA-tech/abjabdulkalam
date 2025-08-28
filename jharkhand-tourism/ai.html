@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>AI Travel Companion · Smart Jharkhand Tourism</title>
+    <link rel="stylesheet" href="/jharkhand-tourism/assets/css/main.css">
+  </head>
+  <body>
+    <div id="app-header"></div>
+    <main class="main">
+      <h1>AI Travel Companion</h1>
+      <p>Personalized itineraries, transport updates, multilingual support, and eco-tips.</p>
+      <div class="grid-2 section">
+        <div class="card">
+          <h3>Chat</h3>
+          <div id="chat-window" style="height:300px;overflow:auto;background:#0f1b39;border-radius:12px;padding:12px"></div>
+          <div class="controls" style="margin-top:8px">
+            <input id="chat-input" placeholder="Ask e.g. Plan a 3-day eco trip from Ranchi under ₹5000" style="flex:1;padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,.08);background:#0f1b39;color:#eaeaea">
+            <button id="chat-mic">🎤</button>
+            <button id="chat-send">Send</button>
+          </div>
+        </div>
+        <div class="grid-cards">
+          <div class="card"><strong>Emergency Help</strong><br><small>Nearest hospital/police/helplines</small></div>
+          <div class="card"><strong>Transport</strong><br><small>Flights, trains, buses, taxis</small></div>
+          <div class="card"><strong>Eco-Tips</strong><br><small>Trekking? Carry bottles, avoid plastic</small></div>
+        </div>
+      </div>
+    </main>
+    <div id="app-footer"></div>
+    <div class="quickbar">
+      <button class="quickbtn" id="qa-sos">🚨 SOS</button>
+      <div class="quickbtn">☁️ <span id="weather-out">Weather</span></div>
+    </div>
+    <script src="/jharkhand-tourism/assets/js/main.js" defer></script>
+    <script>
+      (function(){
+        var win = document.getElementById('chat-window');
+        var input = document.getElementById('chat-input');
+        var send = document.getElementById('chat-send');
+        var mic = document.getElementById('chat-mic');
+        function push(role, text){
+          var div = document.createElement('div');
+          div.textContent = (role==='user'?'You: ':'SJT: ')+text;
+          win.appendChild(div); win.scrollTop = win.scrollHeight;
+        }
+        send.addEventListener('click', function(){
+          var q = (input.value||'').trim(); if(!q) return; push('user', q);
+          var reply = 'Here\'s a draft itinerary for your query: '+ q + '\n- Day 1: Ranchi → Hundru Falls (shared jeep)\n- Day 2: Patratu Valley (e-bike)\n- Day 3: Rock Garden & Tribal Museum\nBudget: under ₹5000 (homestay, local food)';
+          push('ai', reply);
+          input.value='';
+        });
+        if('webkitSpeechRecognition' in window){
+          var r = new webkitSpeechRecognition(); r.lang='en-IN'; r.continuous=false; r.interimResults=false;
+          mic.addEventListener('click', function(){ r.start(); });
+          r.onresult=function(e){ input.value = e.results[0][0].transcript; };
+        }
+      })();
+    </script>
+  </body>
+  </html>
+

@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Destinations & Eco-Map · Smart Jharkhand Tourism</title>
+    <link rel="stylesheet" href="/jharkhand-tourism/assets/css/main.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
+    <style>#map{height:520px;border-radius:16px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,.25)}</style>
+  </head>
+  <body>
+    <div id="app-header"></div>
+    <main class="main">
+      <h1>Destinations & Eco-Map <span class="badge">Beta</span></h1>
+      <p>Eco-sites, cultural landmarks, homestays, and eco-markets with crowd and weather layers.</p>
+      <div class="grid-2 section">
+        <div id="map" aria-label="Eco map"></div>
+        <div>
+          <fieldset>
+            <legend>Layers</legend>
+            <label><input type="checkbox" id="l-eco" checked> Eco-sites</label>
+            <label><input type="checkbox" id="l-cultural" checked> Cultural</label>
+            <label><input type="checkbox" id="l-stays" checked> Homestays</label>
+            <label><input type="checkbox" id="l-markets" checked> Eco-markets</label>
+          </fieldset>
+          <div class="section">
+            <div class="card">Crowd Alert: <span id="crowd">Normal</span></div>
+            <div class="card">Weather: <span id="weather-out">Loading...</span></div>
+          </div>
+          <div class="card">Eco-Badges: <span class="badge">Eco-Safe</span></div>
+        </div>
+      </div>
+    </main>
+    <div id="app-footer"></div>
+    <div class="quickbar">
+      <button class="quickbtn" id="qa-sos">🚨 SOS</button>
+    </div>
+    <script src="/jharkhand-tourism/assets/js/main.js" defer></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+    <script>
+      (function(){
+        var map = L.map('map').setView([23.36,85.33], 7);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '© OpenStreetMap' }).addTo(map);
+        var eco = L.layerGroup().addTo(map);
+        var cultural = L.layerGroup().addTo(map);
+        var stays = L.layerGroup().addTo(map);
+        var markets = L.layerGroup().addTo(map);
+
+        function marker(lat,lon,label,group,color){
+          var m = L.circleMarker([lat,lon],{radius:8,color:color,fillOpacity:0.7});
+          m.bindPopup(label); m.addTo(group); return m;
+        }
+        marker(23.60,85.53,'Hundru Falls · Eco-Safe', eco, '#5bc0be');
+        marker(23.62,85.27,'Patratu Valley · Eco-Safe', eco, '#5bc0be');
+        marker(22.40,84.10,'Betla National Park', eco, '#5bc0be');
+        marker(23.37,85.33,'Ranchi Tribal Museum', cultural, '#ffd166');
+        marker(23.47,85.35,'Kanke Temple', cultural, '#ffd166');
+        marker(23.44,85.28,'Eco Homestay: Bamboo Hut', stays, '#6fffe9');
+        marker(23.38,85.34,'Handicraft Hub: Bamboo & Dokra', markets, '#6fffe9');
+
+        function toggle(id, layer){ document.getElementById(id).addEventListener('change', function(e){ if(e.target.checked){ map.addLayer(layer);} else { map.removeLayer(layer);} }); }
+        toggle('l-eco', eco); toggle('l-cultural', cultural); toggle('l-stays', stays); toggle('l-markets', markets);
+
+        var crowd = document.getElementById('crowd');
+        setInterval(function(){ var levels=['Low','Normal','High']; var lvl = levels[Math.floor(Math.random()*levels.length)]; crowd.textContent=lvl; }, 5000);
+      })();
+    </script>
+  </body>
+  </html>
+
