@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Cultural & Eco Experience · Smart Jharkhand Tourism</title>
+    <link rel="stylesheet" href="/jharkhand-tourism/assets/css/main.css">
+  </head>
+  <body>
+    <div id="app-header"></div>
+    <main class="main">
+      <h1>Cultural & Eco Experience</h1>
+      <section class="grid-2 section">
+        <div>
+          <div class="card" id="cultural"><strong>Cultural Hub</strong><br>Folk tales, tribal legends, festival stories.
+            <div class="section">
+              <button>Music & Dance Library</button>
+              <button>Learn Local (phrases)</button>
+            </div>
+          </div>
+          <div class="card"><strong>Eco-Education</strong><br>Wildlife AR preview and eco tips (stub).</div>
+        </div>
+        <div class="card">
+          <h3>Carbon Calculator</h3>
+          <div class="controls">
+            <label>Distance (km) <input id="cc-dist" type="number" value="100"></label>
+            <label>Mode
+              <select id="cc-mode">
+                <option value="car">Car</option>
+                <option value="bus">Bus</option>
+                <option value="train">Train</option>
+                <option value="bike">E-bike</option>
+                <option value="walk">Walk</option>
+              </select>
+            </label>
+            <button id="cc-calc">Calculate</button>
+          </div>
+          <div id="cc-result" class="section"></div>
+        </div>
+      </section>
+    </main>
+    <div id="app-footer"></div>
+    <div class="quickbar">
+      <button class="quickbtn" id="qa-sos">🚨 SOS</button>
+    </div>
+    <script src="/jharkhand-tourism/assets/js/main.js" defer></script>
+    <script>
+      (function(){
+        var factors = { car:0.192, bus:0.089, train:0.041, bike:0.012, walk:0 };
+        var dist = document.getElementById('cc-dist');
+        var mode = document.getElementById('cc-mode');
+        var out = document.getElementById('cc-result');
+        document.getElementById('cc-calc').addEventListener('click', function(){
+          var d = parseFloat(dist.value||'0'); var m = mode.value; var kg = d * (factors[m]||0);
+          var alt = d * factors['train'];
+          out.innerHTML = '<div class="card">Estimated emissions: <strong>'+kg.toFixed(1)+' kg CO₂</strong><br><small>Train alternative: '+alt.toFixed(1)+' kg CO₂</small></div>';
+        });
+      })();
+    </script>
+  </body>
+  </html>
+

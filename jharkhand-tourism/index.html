@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Smart Jharkhand Tourism</title>
+    <meta name="theme-color" content="#5bc0be">
+    <link rel="manifest" href="/jharkhand-tourism/manifest.webmanifest">
+    <link rel="stylesheet" href="/jharkhand-tourism/assets/css/main.css">
+  </head>
+  <body>
+    <div id="app-header"></div>
+
+    <main class="main">
+      <section class="hero">
+        <div class="banner">
+          <div class="banner-rotator" aria-label="Jharkhand destinations slideshow">
+            <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=1600&auto=format&fit=crop" alt="Sunrise over hills like Netarhat">
+            <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1600&auto=format&fit=crop" alt="Green valley like Patratu">
+            <img src="https://images.unsplash.com/photo-1528821154947-1aa3d1ab0dc8?q=80&w=1600&auto=format&fit=crop" alt="Waterfalls like Hundru">
+            <img src="https://images.unsplash.com/photo-1516426122078-c23e76319801?q=80&w=1600&auto=format&fit=crop" alt="Wildlife like Betla">
+            <img src="https://images.unsplash.com/photo-1519681393784-7f7b0f2e1eb5?q=80&w=1600&auto=format&fit=crop" alt="Tribal dance festival">
+          </div>
+          <div class="overlay"></div>
+        </div>
+        <div>
+          <h1>Explore Jharkhand – Nature. Culture. Community.</h1>
+          <p>Plan eco-friendly journeys with AI assistance, real-time travel, and community-powered experiences.</p>
+
+          <form id="ai-search-form" class="search" role="search" aria-label="AI Travel Search">
+            <label class="sr-only" for="ai-search-input">Search</label>
+            <input id="ai-search-input" name="q" placeholder="Plan a 3-day eco trip from Ranchi under ₹5000" autocomplete="off">
+            <button type="button" id="ai-search-voice" title="Voice input">🎤</button>
+            <button type="submit" title="Search">Search</button>
+          </form>
+
+          <div class="cards" aria-label="Quick links">
+            <a class="card" href="itinerary.html#eco">🌱 Eco-Tours</a>
+            <a class="card" href="culture.html#cultural">🎭 Cultural Tours</a>
+            <a class="card" href="itinerary.html#adventure">⛰️ Adventure</a>
+            <a class="card" href="itinerary.html#spiritual">🕉️ Spiritual</a>
+            <a class="card" href="marketplace.html#handicrafts">🛍️ Handicrafts</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section grid-2">
+        <div class="card">
+          <h3>AI Travel Companion</h3>
+          <p>Get personalized itineraries, transport updates, and eco-tips.</p>
+          <a href="ai.html">Open Assistant →</a>
+        </div>
+        <div class="card">
+          <h3>Destinations & Eco-Map</h3>
+          <p>Explore forests, waterfalls, parks, and cultural landmarks on an interactive map.</p>
+          <a href="map.html">Open Map →</a>
+        </div>
+      </section>
+    </main>
+
+    <div id="app-footer"></div>
+
+    <div class="quickbar" aria-label="Quick access">
+      <button class="quickbtn" id="qa-sos">🚨 SOS</button>
+      <div class="quickbtn" aria-live="polite">☁️ <span id="weather-out">Weather</span></div>
+      <div class="quickbtn">
+        <span>₹</span>
+        <input id="cc-in" type="number" placeholder="Amount" style="width:90px;background:transparent;border:0;color:inherit">
+        <select id="cc-select" style="background:transparent;border:0;color:inherit"></select>
+        <span id="cc-out"></span>
+      </div>
+    </div>
+
+    <script src="/jharkhand-tourism/assets/js/main.js" defer></script>
+  </body>
+  </html>
+

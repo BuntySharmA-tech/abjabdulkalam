@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Itinerary & Booking · Smart Jharkhand Tourism</title>
+    <link rel="stylesheet" href="/jharkhand-tourism/assets/css/main.css">
+  </head>
+  <body>
+    <div id="app-header"></div>
+    <main class="main">
+      <h1>Smart Itinerary & Booking</h1>
+      <div class="grid-2 section">
+        <div>
+          <form class="card" id="plan-form">
+            <h3>Plan your trip</h3>
+            <div class="controls">
+              <label>Starting City <input id="f-city" placeholder="Ranchi"></label>
+              <label>Days <input id="f-days" type="number" min="1" value="3"></label>
+              <label>Budget (₹) <input id="f-budget" type="number" min="0" value="5000"></label>
+              <label>Theme
+                <select id="f-theme">
+                  <option>Eco</option>
+                  <option>Family</option>
+                  <option>Adventure</option>
+                  <option>Spiritual</option>
+                </select>
+              </label>
+              <button type="submit">Generate</button>
+            </div>
+          </form>
+          <div id="plan-out" class="section"></div>
+        </div>
+        <div>
+          <div class="card">
+            <h3>Bookings</h3>
+            <p>Homestays, guides, transport, eco-adventures (stubbed).</p>
+            <button>Browse Homestays</button>
+            <button>Find Guides</button>
+            <button>Eco Transport</button>
+          </div>
+          <div class="card">
+            <h3>Group Planning</h3>
+            <p>Share a planning link with family or friends (stub).</p>
+            <button>Create Group</button>
+          </div>
+        </div>
+      </div>
+    </main>
+    <div id="app-footer"></div>
+    <div class="quickbar">
+      <button class="quickbtn" id="qa-sos">🚨 SOS</button>
+    </div>
+    <script src="/jharkhand-tourism/assets/js/main.js" defer></script>
+    <script>
+      (function(){
+        var out = document.getElementById('plan-out');
+        var params = new URLSearchParams(location.search);
+        var q = params.get('q');
+        if(q){ out.innerHTML = '<div class="card"><strong>AI Request:</strong> '+q+'</div>'; }
+        document.getElementById('plan-form').addEventListener('submit', function(e){
+          e.preventDefault();
+          var city = document.getElementById('f-city').value||'Ranchi';
+          var days = parseInt(document.getElementById('f-days').value||'3',10);
+          var budget = parseInt(document.getElementById('f-budget').value||'5000',10);
+          var theme = document.getElementById('f-theme').value||'Eco';
+          var plan = '<div class="card"><h3>'+theme+' Itinerary ('+days+' days)</h3>'+
+            '<ul>'+
+            '<li>Day 1: '+city+' → Hundru Falls (shared jeep)</li>'+
+            '<li>Day 2: Patratu Valley (e-bike)</li>'+
+            '<li>Day 3: Rock Garden & Tribal Museum</li>'+
+            '</ul>'+ 
+            '<p>Suggested budget: ₹'+budget+' · Transport: shared jeep/e-bikes · Stay: eco-homestay</p>'+ 
+            '</div>';
+          out.innerHTML = plan;
+        });
+      })();
+    </script>
+  </body>
+  </html>
+

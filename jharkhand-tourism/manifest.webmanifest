@@ -1,0 +1,11 @@
+{
+  "name": "Smart Jharkhand Tourism",
+  "short_name": "SJT",
+  "start_url": "/jharkhand-tourism/index.html",
+  "scope": "/jharkhand-tourism/",
+  "display": "standalone",
+  "background_color": "#0b132b",
+  "theme_color": "#5bc0be",
+  "icons": []
+}
+
